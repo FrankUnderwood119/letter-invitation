@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>见字如晤 · 写信活动意向收集</title>
+<meta name="description" content="一场关于写信的小活动。留下你的参与意向，等一封信。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f6f1e6;
+  --card:#fcf9f0;
+  --field:#fffdf6;
+  --ink:#2b2519;
+  --muted:#7c7159;
+  --line:#ddd3bf;
+  --stamp:#a63d2a;
+  --serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+  --sans:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font:400 16px/1.75 var(--sans);
+  -webkit-font-smoothing:antialiased;
+}
+.page{max-width:640px;margin:0 auto;padding:52px 22px 64px}
+@media (prefers-reduced-motion:no-preference){
+  .page{animation:rise .45s ease-out both}
+}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+header{position:relative;min-height:104px}
+/* 首图即朋友圈分享封面：微信抓取页面第一张图，故置于 body 最前 */
+.stamp{
+  position:absolute;top:0;right:0;width:86px;height:86px;
+  display:block;border-radius:2px;
+  transform:rotate(4deg);
+}
+.tag{margin:20px 0 12px;font:500 12px/1.6 var(--sans);letter-spacing:.26em;color:var(--muted)}
+h1{margin:0 0 10px;font:700 clamp(38px,9vw,54px)/1.2 var(--serif);letter-spacing:.1em}
+.sub{margin:0;font-size:15px;color:var(--muted)}
+
+.intro{margin-top:34px}
+.intro p{margin:0 0 15px;font:400 16px/1.95 var(--serif)}
+.sign{margin-top:26px!important;display:flex;justify-content:flex-end;align-items:center;gap:10px;font-size:17px}
+.seal{
+  display:inline-flex;width:30px;height:30px;border-radius:5px;flex:none;
+  background:var(--stamp);color:#f8f3e7;
+  align-items:center;justify-content:center;
+  font:600 16px/1 var(--serif);transform:rotate(-6deg);
+}
+
+.divider{display:flex;align-items:center;gap:10px;margin:32px 0}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+.divider .mark{width:7px;height:7px;flex:none;background:var(--stamp);transform:rotate(45deg)}
+
+.steps ol{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.steps li{display:flex;gap:11px;align-items:baseline;font-size:15px}
+.steps b{font:500 16px/1 var(--serif);color:var(--stamp);flex:none}
+
+form{
+  margin-top:34px;background:var(--card);border:1px solid var(--line);
+  border-radius:14px;padding:26px 22px 22px;display:grid;gap:18px;
+}
+.form-title{margin:-4px 0 2px;font:600 17px/1.5 var(--serif);letter-spacing:.06em}
+.field label{display:block;margin-bottom:7px;font-size:13px;font-weight:500}
+.field label i{font-style:normal;font-weight:400;color:var(--muted);margin-left:6px}
+input[type=text],textarea{
+  width:100%;background:var(--field);border:1px solid var(--line);border-radius:9px;
+  padding:11px 13px;font:400 16px/1.6 var(--sans);color:var(--ink);
+  outline:none;transition:border-color .15s,box-shadow .15s;
+}
+input:focus,textarea:focus{border-color:var(--stamp);box-shadow:0 0 0 3px rgba(166,61,42,.13)}
+textarea{resize:vertical;min-height:86px}
+.agree{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;color:var(--muted);cursor:pointer}
+.agree input{width:16px;height:16px;flex:none;margin:3px 0 0;accent-color:var(--stamp)}
+.agree a{color:var(--stamp);text-decoration:none;border-bottom:1px solid rgba(166,61,42,.4)}
+.error{margin:0;font-size:13.5px;color:var(--stamp)}
+.btn-main{
+  justify-self:start;background:var(--ink);color:var(--paper);border:0;border-radius:10px;
+  padding:14px 28px;font:500 15px/1 var(--sans);letter-spacing:.14em;cursor:pointer;
+  transition:opacity .15s,transform .06s;
+}
+.btn-main:hover{opacity:.87}
+.btn-main:active{transform:translateY(1px)}
+.mail-note{margin:0;font-size:12.5px;line-height:1.7;color:var(--muted)}
+
+.direct{margin-top:30px;font-size:14.5px}
+.direct>p{margin:0}
+.mailrow{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:10px 0 0}
+.mail{
+  font:500 17px/1.4 var(--serif);color:var(--ink);text-decoration:none;
+  border-bottom:1px solid var(--stamp);padding-bottom:1px;
+}
+.mail:hover{color:var(--stamp)}
+.btn-ghost{
+  background:transparent;border:1px solid var(--line);border-radius:999px;
+  padding:9px 16px;font:500 13px/1 var(--sans);color:var(--muted);cursor:pointer;
+  transition:color .15s,border-color .15s;
+}
+.btn-ghost:hover{color:var(--stamp);border-color:var(--stamp)}
+.direct .host{margin:8px 0 0;font-size:13px;color:var(--muted)}
+
+.disclaimer{margin-top:46px;border-top:1px solid var(--line);padding-top:22px}
+.disclaimer h2{margin:0 0 12px;font:600 16px/1.5 var(--serif);letter-spacing:.12em}
+.disclaimer ol{margin:0;padding-left:20px;font-size:12.5px;line-height:1.9;color:var(--muted);display:grid;gap:6px}
+
+footer{margin-top:42px;text-align:center;font-size:12px;letter-spacing:.12em;color:var(--muted)}
+@media (max-width:380px){
+  .stamp{width:70px;height:70px}
+}
+</style>
+</head>
+<body>
+<main class="page">
+  <header>
+    <img class="stamp" src="cover.jpg" width="600" height="600" alt="见字如晤 · 写信活动意向收集">
+    <p class="tag">意向收集中 · A LETTER CAMPAIGN</p>
+    <h1>见字如晤</h1>
+    <p class="sub">在所有消息都秒回之前，先认真写一封信。</p>
+  </header>
+
+  <section class="intro">
+    <p>微信把话变短，邮件把事变快。这次想把节奏调慢一点：用笔，或者键盘，认真写一封信——给朋友，给家人，给一年后的自己，或者给一个还不知道名字的人。</p>
+    <p>不用写得漂亮，写得诚实就好。</p>
+    <p class="sign">—— Franklin Underwood <span class="seal" aria-hidden="true">晤</span></p>
+  </section>
+
+  <div class="divider" aria-hidden="true"><span class="mark"></span></div>
+
+  <section class="steps">
+    <ol>
+      <li><b>壹</b><span>填写下方意向表，或直接发邮件给我</span></li>
+      <li><b>贰</b><span>我会通过邮箱回复，告诉你时间、地点等具体安排</span></li>
+      <li><b>叁</b><span>然后，等一封信</span></li>
+    </ol>
+  </section>
+
+  <form id="li-form" novalidate>
+    <p class="form-title">写下你的意向</p>
+    <div class="field">
+      <label for="li-name">称呼<i>姓名或昵称</i></label>
+      <input id="li-name" name="name" type="text" autocomplete="name" placeholder="例如：林一">
+    </div>
+    <div class="field">
+      <label for="li-contact">联系方式<i>微信 / QQ / 邮箱，任填其一</i></label>
+      <input id="li-contact" name="contact" type="text" placeholder="方便我把后续安排发给你">
+    </div>
+    <div class="field">
+      <label for="li-msg">想说的话<i>选填</i></label>
+      <textarea id="li-msg" name="message" rows="3" placeholder="想写给谁？或者，最近有什么想说而没说的？"></textarea>
+    </div>
+    <label class="agree"><input id="li-agree" type="checkbox"><span>我已阅读并同意<a href="#disclaimer">免责声明</a></span></label>
+    <p id="li-error" class="error" role="alert" hidden></p>
+    <button type="submit" class="btn-main">提 交 意 向</button>
+    <p class="mail-note">点击提交会打开你设备上的邮件应用，并自动填好收件人与内容，确认后再发送即可，不会自动发出。</p>
+  </form>
+
+  <section class="direct">
+    <p>不方便填表？也可以直接把意向发到我的邮箱：</p>
+    <p class="mailrow">
+      <a class="mail" href="mailto:18737401218@163.com">18737401218@163.com</a>
+      <button id="li-copy" type="button" class="btn-ghost">复制邮箱</button>
+    </p>
+    <p class="host">发起人：Franklin Underwood</p>
+  </section>
+
+  <section id="disclaimer" class="disclaimer">
+    <h2>免责声明</h2>
+    <ol>
+      <li>本页面仅用于「见字如晤」写信活动的参与意向收集，不收集身份证号、住址、密码等任何敏感信息。</li>
+      <li>通过页面或邮箱提交的称呼与联系方式，仅由发起人 Franklin Underwood 用于本次活动联络与名单统计，不对外公开，也不提供给任何第三方。</li>
+      <li>参与完全自愿：提交意向不代表最终确认参加；活动开始前你可以随时退出，告知发起人后，相关信息将不再保留。</li>
+      <li>活动的时间、地点与形式如有调整，以发起人通过邮箱或群通知发布的最新信息为准。</li>
+      <li>如对本页面或信息使用有任何疑问，可随时通过 18737401218@163.com 联系发起人。</li>
+    </ol>
+  </section>
+
+  <footer>Franklin Underwood · 2026 年秋 · 本页面仅用于活动意向收集</footer>
+</main>
+
+<script>
+(function(){
+  var EMAIL = '18737401218@163.com';
+  var form = document.getElementById('li-form');
+  var errEl = document.getElementById('li-error');
+
+  function showError(text){
+    errEl.textContent = text;
+    errEl.hidden = false;
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('li-name').value.trim();
+    var contact = document.getElementById('li-contact').value.trim();
+    var msg = document.getElementById('li-msg').value.trim();
+    var agree = document.getElementById('li-agree').checked;
+
+    if(!name || !contact){ showError('请先填写称呼和联系方式。'); return; }
+    if(!agree){ showError('请先阅读并勾选同意免责声明。'); return; }
+    errEl.hidden = true;
+
+    var subject = '写信活动意向｜' + name;
+    var body = '称呼：' + name + '\r\n联系方式：' + contact +
+               '\r\n想说的话：' + (msg || '（未填写）') +
+               '\r\n\r\n—— 来自「见字如晤」意向收集页';
+    var url = 'mailto:' + EMAIL +
+              '?subject=' + encodeURIComponent(subject) +
+              '&body=' + encodeURIComponent(body);
+    try{
+      window.location.href = url;
+    }catch(err){
+      showError('无法唤起邮件应用，请直接发邮件至 ' + EMAIL + '。');
+    }
+  });
+
+  var copyBtn = document.getElementById('li-copy');
+  copyBtn.addEventListener('click', function(){
+    function done(){
+      copyBtn.textContent = '已复制 ✓';
+      setTimeout(function(){ copyBtn.textContent = '复制邮箱'; }, 1600);
+    }
+    function fail(){
+      copyBtn.textContent = '复制失败，请手动选择';
+      setTimeout(function(){ copyBtn.textContent = '复制邮箱'; }, 1800);
+    }
+    function legacyCopy(){
+      try{
+        var ta = document.createElement('textarea');
+        ta.value = EMAIL;
+        ta.setAttribute('readonly','');
+        ta.style.position = 'absolute';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        var ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        return ok;
+      }catch(err){ return false; }
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(EMAIL).then(done).catch(function(){
+        legacyCopy() ? done() : fail();
+      });
+    }else{
+      legacyCopy() ? done() : fail();
+    }
+  });
+})();
+</script>
+</body>
+</html>
